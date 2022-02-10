@@ -107,7 +107,7 @@ def process(docx, img_dir=None):
     return text.strip()
 
 
-if __name__ == '__main__':
-    args = process_args()
-    text = process(args.docx, args.img_dir)
-    sys.stdout.write(text.encode('utf-8'))
+# if __name__ == '__main__':
+#     args = process_args()
+#     text = process(args.docx, args.img_dir)
+#     sys.stdout.write(text.encode('utf-8'))
