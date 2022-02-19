@@ -16,13 +16,13 @@ def main():
 
     if output_dir:
         libre_office_command = \
-            "soffice \"{docx_name}\" --headless --convert-to \"txt:Text (encoded):UTF8\" " \
-            "--outdir {output_dir} *.txt".format(docx_name=args.docx,
-                                                 output_dir=output_dir)
+            "soffice --headless --convert-to \"txt:Text (encoded):UTF8\" \"{docx_name}\" " \
+            "--outdir {output_dir}".format(docx_name=args.docx,
+                                           output_dir=output_dir)
     else:
         libre_office_command = \
-            "soffice \"{docx_name}\" --headless --convert-to " \
-            "\"txt:Text (encoded):UTF8\" *.txt".format(docx_name=args.docx)
+            "soffice --headless --convert-to \"txt:Text (encoded):UTF8\" " \
+            "\"{docx_name}\"".format(docx_name=args.docx)
     print(libre_office_command)
     if sys.platform.startswith('win'):
         libre_office_command = libre_office_command
@@ -43,6 +43,6 @@ def main():
         content = input_file.read()
         test_str = content[:50]
         text = content.decode(encoding=chardet.detect(test_str)['encoding'])
-    text = text.replace('    [', '[')
+    text = text.replace('    [', '[').replace('\r', '')
     with open(output_name, 'wb') as output_file:
         output_file.write(text.encode('utf-8'))
